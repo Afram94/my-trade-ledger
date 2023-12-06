@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('trades', function (Blueprint $table) {
             $table->id();
+            $table->string('stock_name');
+            $table->decimal('buy_price', 8, 2);
+            $table->decimal('sell_price', 8, 2)->nullable();
+            $table->boolean('status')->default(false); // false for loss, true for profit
+            $table->decimal('percentage', 5, 2)->nullable(); // percentage of profit or loss
             $table->timestamps();
         });
     }
