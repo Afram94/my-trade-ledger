@@ -9,7 +9,7 @@ class TradeController extends Controller
 {
     public function index()
     {
-        $trades = Trade::all();
+        $trades = Trade::with('TradeType')->get();
 
         return inertia('Trading/Show', [
             'auth' => [

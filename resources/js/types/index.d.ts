@@ -7,6 +7,8 @@ export interface User {
 
 export interface Trade {
     id: number;
+    trade_type_id: number;
+    trade_type: TradeType;
     stock_name: string;
     buy_price: number;
     sell_price: number;
@@ -14,9 +16,17 @@ export interface Trade {
     percentage: number;
 }
 
+export interface TradeType {
+    id: number;
+    name: string;
+    initial_capital: number;
+    uses_compounding_interest: boolean;
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User;
-        trade: Trade[]
+        trade: Trade[];
+        trade_type: TradeType[];
     };
 };

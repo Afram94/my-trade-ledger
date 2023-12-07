@@ -11,6 +11,7 @@ class Trade extends Model
 
     protected $fillable = [
         'id',
+        'trade_type_id',
         'stock_name',
         'buy_price',
         'sell_price',
@@ -21,4 +22,9 @@ class Trade extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function tradeType()
+    {
+        return $this->belongsTo(TradeType::class);
+    }
 }

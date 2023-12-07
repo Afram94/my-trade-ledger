@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\TradeController;
+use App\Http\Controllers\TradeTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/trades', [TradeController::class, 'index']);
     Route::post('/trades', [TradeController::class, 'create']);
+    
+    
+    
+    Route::resource('trade-types', TradeTypeController::class)->only(['index', 'store']);
+    Route::get('/trade-types-data', [TradeTypeController::class, 'getTradingTypeData']);
+
 });
 
 require __DIR__.'/auth.php';

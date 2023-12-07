@@ -12,6 +12,7 @@ const Show: React.FC<PageProps> = ({ auth }) => {
                 <thead>
                     <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
                         <th className="px-4 py-3">ID</th>
+                        <th className="px-4 py-3">Trading Type</th>
                         <th className="px-4 py-3">Stock Name</th>
                         <th className="px-4 py-3">Buy Price</th>
                         <th className="px-4 py-3">Sell Price</th>
@@ -23,6 +24,7 @@ const Show: React.FC<PageProps> = ({ auth }) => {
                     {trades.map((trade: Trade) => (
                         <tr key={trade.id} className="text-gray-700">
                             <td className="px-4 py-3 text-sm">{trade.id}</td>
+                            <td className="px-4 py-3 text-sm">{trade.trade_type.name}</td>
                             <td className="px-4 py-3 text-sm">{trade.stock_name}</td>
                             <td className="px-4 py-3 text-sm">{trade.buy_price}</td>
                             <td className="px-4 py-3 text-sm">{trade.sell_price}</td>
