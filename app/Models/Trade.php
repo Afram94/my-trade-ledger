@@ -11,7 +11,7 @@ class Trade extends Model
 
     protected $fillable = [
         'id',
-        'trade_type_id',
+        'initial_capital',
         'stock_name',
         'buy_price',
         'sell_price',
@@ -23,8 +23,27 @@ class Trade extends Model
         'status' => 'boolean',
     ];
 
-    public function tradeType()
+    /* public function tradeType()
     {
         return $this->belongsTo(TradeType::class);
+    } */
+
+    public function calculateProfitLoss()
+    {
+        if ($this->sell_price && $this->buy_price) {
+            return ($this->sell_price - $this->buy_price) * $this->initial_capital;
+        }
+
+        return 0;
     }
+
+    public function calculateProfitLossPercentage()
+    {
+        if ($this->buy_price != 0) {
+            return (($this->sell_price - $this->buy_price) / $this->buy_price) * 100;
+        }
+
+        return 0;
+    }
+
 }

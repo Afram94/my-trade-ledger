@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('trades', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('trade_type_id')->constrained(); // Foreign key to trade_types table
+            /* $table->foreignId('trade_type_id')->constrained(); // Foreign key to trade_types table */
+            $table->decimal('initial_capital', 10, 2);
             $table->string('stock_name');
             $table->decimal('buy_price', 8, 2);
             $table->decimal('sell_price', 8, 2)->nullable();

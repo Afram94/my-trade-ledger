@@ -9,14 +9,32 @@ class TradeController extends Controller
 {
     public function index()
     {
-        $trades = Trade::with('TradeType')->get();
+        $trades = Trade::all();
+        $totalProfitLoss = 0;
+
+        foreach ($trades as $trade) {
+            // Assuming calculateProfitLossPercentage returns the percentage profit or loss
+            $percentageProfitLoss = $trade->calculateProfitLossPercentage();
+            $trade->percentage = $percentageProfitLoss;
+
+            // Reverse-engineering the absolute profit/loss from percentage
+            // Profit/Loss = Buy Price * (Percentage / 100)
+            $profitLoss = $trade->buy_price * ($percentageProfitLoss / 100);
+            $trade->profit_loss = $profitLoss;
+            $totalProfitLoss += $profitLoss;
+        }
 
         return inertia('Trading/Show', [
             'auth' => [
                 'trade' => $trades,
+                'totalProfitLoss' => $totalProfitLoss,
             ]
         ]);
     }
+
+
+
+
 
     public function create(Request $request)
     {

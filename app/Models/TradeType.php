@@ -24,4 +24,21 @@ class TradeType extends Model
     {
         return $this->hasMany(Trade::class);
     }
+
+    public function calculateWithCompoundingInterest($trade)
+    {
+        // Implement compounding interest calculation logic here
+        // Example:
+        $capital = $this->initial_capital;
+        $changeAmount = $capital * ($trade->percentage / 100);
+        return $capital + $changeAmount;
+    }
+
+    public function calculateWithoutCompoundingInterest($trade)
+    {
+        // Implement non-compounding interest calculation logic here
+        // Example:
+        $changeAmount = $this->initial_capital * ($trade->percentage / 100);
+        return $this->initial_capital + $changeAmount;
+    }
 }

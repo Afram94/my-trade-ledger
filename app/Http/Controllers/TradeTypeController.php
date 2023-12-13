@@ -7,7 +7,7 @@ use App\Models\TradeType;
 
 class TradeTypeController extends Controller
 {
-    public function index()
+    /* public function index()
     {
         $tradeTypes = TradeType::all();
 
@@ -35,5 +35,5 @@ class TradeTypeController extends Controller
 
         $tradeType = TradeType::create($validatedData);
         return response()->json($tradeType, 201);
-    }
+    } */
 }

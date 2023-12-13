@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageProps, TradeType } from '@/types';
 import CreateTypeTradeModal from './Components/CreateTypeTradeModal';
+import { Link } from '@inertiajs/react';
 
 const ShowTradeTypes: React.FC<PageProps> = ({ auth }) => {
     const tradeTypes = auth.trade_type; // Assuming this is an array of TradeType objects
@@ -21,12 +22,14 @@ const ShowTradeTypes: React.FC<PageProps> = ({ auth }) => {
                 </thead>
                 <tbody className="bg-white divide-y">
                     {tradeTypes?.map((tradeType: TradeType) => (
-                        <tr key={tradeType.id} className="text-gray-700">
-                            <td className="px-4 py-3 text-sm">{tradeType.id}</td>
-                            <td className="px-4 py-3 text-sm">{tradeType.name}</td>
-                            <td className="px-4 py-3 text-sm">{tradeType.initial_capital}</td>
-                            <td className="px-4 py-3 text-sm">{tradeType.uses_compounding_interest ? 'Yes' : 'No'}</td>
-                        </tr>
+                        <Link href={`/trades/type/${tradeType.id}`} >
+                            <tr key={tradeType.id} className="text-gray-700">
+                                <td className="px-4 py-3 text-sm">{tradeType.id}</td>
+                                <td className="px-4 py-3 text-sm">{tradeType.name}</td>
+                                <td className="px-4 py-3 text-sm">{tradeType.initial_capital}</td>
+                                <td className="px-4 py-3 text-sm">{tradeType.uses_compounding_interest ? 'Yes' : 'No'}</td>
+                            </tr>
+                        </Link>
                     ))}
                 </tbody>
             </table>
