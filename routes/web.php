@@ -28,9 +28,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
+/* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); */
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [TradeController::class, 'dashboard'])->name('dashboard');
+    // ... other routes ...
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,6 +46,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/trades', [TradeController::class, 'index']);
     Route::post('/trades', [TradeController::class, 'create']);
+    
     
     
     

@@ -17,6 +17,7 @@ export interface Trade {
     sell_price: number;
     status: boolean;
     percentage: number;
+    created_at: Date;
 }
 
 export interface TradeType {

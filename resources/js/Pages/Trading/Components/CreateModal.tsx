@@ -9,7 +9,7 @@ const CreateModal: React.FC = () => {
 
     return (
         <div>
-            <PrimaryButton className='my-3' onClick={() => setModalOpen(true)}>
+            <PrimaryButton className='my-3 bg-green-500' onClick={() => setModalOpen(true)}>
                 <FaPlus/>
                 <p className='px-2'>Add a trade</p>
                 
