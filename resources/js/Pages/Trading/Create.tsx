@@ -16,7 +16,8 @@ const Create: React.FC<CreateTradeProps> = ({ closeModal }) => {
         buy_price: '',
         sell_price: '',
         status: false,
-        percentage: ''
+        percentage: '',
+        fee_percentage: 0.50,
     });
 
     // State for the list of trade types
@@ -50,7 +51,7 @@ const Create: React.FC<CreateTradeProps> = ({ closeModal }) => {
         axios.post('/trades', newTrade)
             .then(response => {
                 closeModal();
-                setNewTrade({ /* trade_type_id: '', */initial_capital: '', stock_name: '', buy_price: '', sell_price: '', status: false, percentage: '' });
+                setNewTrade({ /* trade_type_id: '', */initial_capital: '', stock_name: '', buy_price: '', sell_price: '', status: false, percentage: '', fee_percentage: 0.50 });
             })
             .catch(error => {
                 console.error('Error adding trade:', error);
@@ -102,6 +103,15 @@ const Create: React.FC<CreateTradeProps> = ({ closeModal }) => {
                     value={newTrade.sell_price}
                     onChange={handleInputChange}
                 />
+                <select 
+                    name="fee_percentage"
+                    value={newTrade.fee_percentage}
+                    onChange={handleInputChange}
+                >
+                    {[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3, 3.25, 3.5, 3.75, 4, 4.25, 4.5, 4.75, 5].map(value => (
+                        <option key={value} value={value}>{value}%</option>
+                    ))}
+                </select>
                 {/* <TextInput
                     type="number"
                     name="percentage"

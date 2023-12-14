@@ -17,6 +17,8 @@ export interface Trade {
     sell_price: number;
     status: boolean;
     percentage: number;
+    fee_percentage: number;
+    totalFee: number;
     created_at: Date;
 }
 

@@ -12,17 +12,20 @@ class TradeController extends Controller
         $trades = Trade::all();
         $totalProfitLoss = 0;
 
-        foreach ($trades as $trade) {
-            // Assuming calculateProfitLossPercentage returns the percentage profit or loss
-            $percentageProfitLoss = $trade->calculateProfitLossPercentage();
-            $trade->percentage = $percentageProfitLoss;
+    foreach ($trades as $trade) {
+        $percentageProfitLoss = $trade->calculateProfitLossPercentage();
+        $trade->percentage = $percentageProfitLoss;
 
-            // Reverse-engineering the absolute profit/loss from percentage
-            // Profit/Loss = Buy Price * (Percentage / 100)
-            $profitLoss = $trade->buy_price * ($percentageProfitLoss / 100);
-            $trade->profit_loss = $profitLoss;
-            $totalProfitLoss += $profitLoss;
-        }
+        $profitLoss = $trade->buy_price * ($percentageProfitLoss / 100);
+
+        // Use the fee percentage from the trade
+        $feeAmount = $trade->buy_price * ($trade->fee_percentage / 100);
+        $adjustedProfitLoss = $profitLoss - $feeAmount;
+
+        $trade->profit_loss = $adjustedProfitLoss;
+        $totalProfitLoss += $adjustedProfitLoss;
+    }
+
 
         return inertia('Trading/Show', [
             'auth' => [

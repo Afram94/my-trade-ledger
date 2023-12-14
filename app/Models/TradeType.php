@@ -20,7 +20,7 @@ class TradeType extends Model
         'uses_compounding_interest' => 'boolean',
     ];
 
-    public function trades()
+    /* public function trades()
     {
         return $this->hasMany(Trade::class);
     }
@@ -40,5 +40,5 @@ class TradeType extends Model
         // Example:
         $changeAmount = $this->initial_capital * ($trade->percentage / 100);
         return $this->initial_capital + $changeAmount;
-    }
+    } */
 }

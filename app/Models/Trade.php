@@ -17,6 +17,7 @@ class Trade extends Model
         'sell_price',
         'status',
         'percentage',
+        'fee_percentage',
     ];
 
     protected $casts = [

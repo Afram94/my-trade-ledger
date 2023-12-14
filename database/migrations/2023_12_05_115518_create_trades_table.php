@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('sell_price', 8, 2)->nullable();
             $table->boolean('status')->default(false); // false for loss, true for profit
             $table->decimal('percentage', 5, 2)->nullable(); // percentage of profit or loss
+            $table->decimal('fee_percentage', 3, 2)->default(0.50); // default value of 0.50%
             $table->timestamps();
         });
     }
